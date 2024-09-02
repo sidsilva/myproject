@@ -1,6 +1,6 @@
 ---
 - name: get namespace name
-  hosts: localhost
+  hosts: all
   collections:
     - oracle.oci
   tasks:
