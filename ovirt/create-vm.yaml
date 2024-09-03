@@ -1,0 +1,66 @@
+---
+- hosts: olvm
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+    - password.yml
+  tasks:
+    - name: Login to OLVM manager
+      ovirt_auth:
+        hostname: "{{ olvm_fqdn }}"
+        username: "{{ olvm_user }}"
+        password: "{{ olvm_password }}"
+        ca_file: "{{ olvm_cafile | default(omit) }}"
+        insecure: "{{ olvm_insecure | default(true) }}"
+      tags:
+        - always
+    - name: Create Virtual Machine(s)
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        #cluster: "{{ olvm_cluster | default('Default') }}"
+        cluster: "{{ hostvars[item]['cluster'] }}"
+        #template: "{{ olvm_template }}"
+        template: "{{ hostvars[item]['template'] }}"
+        description: "{{ hostvars[item]['description'] }}"
+        name: "{{ item }}"
+        state: running
+        memory: "{{ hostvars[item]['vm_ram'] | default('1GiB') }}"
+        cpu_cores: "{{ hostvars[item]['vm_cpu_cores'] }}"
+        storage_domain: "{{ hostvars[item]['domain'] }}"
+        high_availability: yes
+        cloud_init_persist: true
+        clone: true
+        exclusive: true
+        serial_policy: vm
+        cloud_init:
+          host_name: "{{ hostvars[item]['ansible_host'] }}"
+          user_name: root
+          root_password: "{{ vm_root_passwd }}"
+          dns_servers: "{{ vm_dns }}"
+          dns_search: "{{ vm_dns_domain }}"
+          #nic_name: "{{ hostvars[item]['nic'] | default('enp1s0') }}"
+          nic_name: "{{ hostvars[item]['nic'] }}"
+          #  nic_on_boot: true
+          nic_boot_protocol_v6: none
+          nic_boot_protocol: static
+          nic_ip_address: "{{ hostvars[item]['ansible_ssh_host'] }}"
+          nic_gateway: "{{ vm_gateway }}"
+          nic_netmask: "{{ vm_netmask }}"
+          timezone: "{{ vm_timezone }}"
+          custom_script: |
+            runcmd:
+              - hostnamectl set-hostname {{ hostvars[item]['ansible_host'] }}
+              - yum -y remove cloud-init
+              - /stage/SA/post-deployment-scripts/global/all_hosts.sh
+              - /stage/SA/post-deployment-scripts/application-specific/${{ hostvars[item]['app'] }}/app.sh
+                #- nmcli connection modify "System enp1s0" con-name "vmnet"
+                #- nmcli connection modify VMnet ipv6.method "disabled"
+                #- nmcli connection up vmnet
+                #- /ADMIN/SA/jleonard/post-install-scripts/{{ hostvars[item]['ansible_host'] }}.sh
+        wait: true
+      loop: "{{ groups['virtualmachines'] }}"
+    - name: Cleanup OLVM auth token
+      ovirt_auth:
+        ovirt_auth: "{{ ovirt_auth }}"
+        state: absent

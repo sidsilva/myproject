@@ -1,0 +1,270 @@
+all:
+  children:
+    olvm:
+      hosts:
+        ds-olvm.ba.ssa.gov:
+          olvm_cafile: /etc/pki/ovirt-engine/apache-ca.pem
+          olvm_cluster: TEST-APP
+          olvm_fqdn: ds-olvm.ba.ssa.gov
+          olvm_template: ol8
+          olvm_user: admin@ovirt@internalsso
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_timezone: America/New_York
+    ungrouped: {}
+    virtualmachines:
+      hosts:
+        ds-t1-apx-01:
+          ansible_host: ds-t1-apx-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.27
+          app: apx
+          cluster: DEV-APP
+          description: Apache Tomcat / APEX
+          domain: T1_APP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 8192MiB
+          vm_timezone: America/New_York
+        ds-t1-apx-02:
+          ansible_host: ds-t1-apx-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.28
+          app: apx
+          cluster: DEV-APP
+          description: Apache Tomcat / APEX
+          domain: T1_APP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 8192MiB
+          vm_timezone: America/New_York
+        ds-t1-db-01:
+          ansible_host: ds-t1-db-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.20
+          app: db
+          cluster: DEV-ODB
+          description: Oracle Database
+          domain: T1_ODB_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8_db
+          vm_cpu_cores: 8
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 131072MiB
+          vm_timezone: America/New_York
+        ds-t1-db-02:
+          ansible_host: ds-t1-db-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.21
+          app: db
+          cluster: DEV-ODB
+          description: Oracle Database
+          domain: T1_ODB_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8_db
+          vm_cpu_cores: 8
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 131072MiB
+          vm_timezone: America/New_York
+        ds-t1-ebs-01:
+          ansible_host: ds-t1-ebs-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.10
+          app: ebs
+          cluster: DEV-OAPP
+          description: Oracle E-Business Suite
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 8
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 32768MiB
+          vm_timezone: America/New_York
+        ds-t1-ebs-02:
+          ansible_host: ds-t1-ebs-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.11
+          app: ebs
+          cluster: DEV-OAPP
+          description: Oracle E-Business Suite
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 8
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 32768MiB
+          vm_timezone: America/New_York
+        ds-t1-idm-01:
+          ansible_host: ds-t1-idm-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.12
+          app: idm
+          cluster: DEV-OAPP
+          description: Oracle SSO
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York
+        ds-t1-idm-02:
+          ansible_host: ds-t1-idm-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.13
+          app: idm
+          cluster: DEV-OAPP
+          description: Oracle SSO
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York
+        ds-t1-idm-03:
+          ansible_host: ds-t1-idm-03.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.14
+          app: ovd
+          cluster: DEV-OAPP
+          description: Oracle SSO ( OVD )
+          domain: T1_OAPP_DATA
+          nic: eth0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol7
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York
+        ds-t1-idm-04:
+          ansible_host: ds-t1-idm-04.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.15
+          app: ovd
+          cluster: DEV-OAPP
+          description: Oracle SSO ( OVD )
+          domain: T1_OAPP_DATA
+          nic: eth0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol7
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York
+        ds-t1-soa-01:
+          ansible_host: ds-t1-soa-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.16
+          app: soa
+          cluster: DEV-OAPP
+          description: Oracle SOA
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 4
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 32768MiB
+          vm_timezone: America/New_York
+        ds-t1-soa-02:
+          ansible_host: ds-t1-soa-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.17
+          app: soa
+          cluster: DEV-OAPP
+          description: Oracle SOA
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 4
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 32768MiB
+          vm_timezone: America/New_York
+        ds-t1-wtg-01:
+          ansible_host: ds-t1-wtg-01.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.18
+          app: wtg
+          cluster: DEV-OAPP
+          description: Oracle WebTier/WebGate
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York
+        ds-t1-wtg-02:
+          ansible_host: ds-t1-wtg-02.ba.ssa.gov
+          ansible_ssh_host: 10.28.203.19
+          app: wtg
+          cluster: DEV-OAPP
+          description: Oracle WebTier/WebGate
+          domain: T1_OAPP_DATA
+          nic: enp1s0
+          olvm_cluster: TEST-APP
+          olvm_template: ol8
+          template: ol8
+          vm_cpu_cores: 2
+          vm_dns: 172.17.221.133 172.17.198.100 10.24.58.112 10.24.58.109
+          vm_dns_domain: ba.ssa.gov
+          vm_gateway: 10.28.203.254
+          vm_netmask: 255.255.254.0
+          vm_ram: 16384MiB
+          vm_timezone: America/New_York

@@ -1,0 +1,9 @@
+---
+- name: Sysctl settings (disable IPv6)
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+    - ansible.posix.selinux:
+        policy: disabled
+        state: disabled

@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+
+    SEARCH_STRING: "USER="
+    SEARCH_FILE: "/var/log/secure"
+
+  tasks:
+
+  - name: Search for string in file
+    command:
+      cmd: "grep '{{ SEARCH_STRING }}' {{ SEARCH_FILE }}"
+    register: result
+    # Since it is a reporting task
+    # which needs to deliver a result in any case
+    failed_when: result.rc != 0 and result.rc != 1
+    check_mode: false
+    changed_when: false
+  - name: Show result, if any
+    debug:
+      var: result.stdout_lines
+    when: result.rc == 0

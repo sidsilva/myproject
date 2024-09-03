@@ -1,0 +1,10 @@
+---
+- name: Install Puppet agent
+  hosts: all
+    
+  tasks:
+
+    - name: Install Puppet agent
+      package:
+        name: puppet-agent
+        state: present

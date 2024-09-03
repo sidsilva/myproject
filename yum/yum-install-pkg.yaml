@@ -1,0 +1,9 @@
+---
+- hosts: "{{ hosts }}"
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install package
+      yum:
+        name: "{{ package }}"
+        state: latest

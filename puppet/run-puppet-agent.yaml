@@ -1,0 +1,7 @@
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: Run puppet agent and fail if anything goes wrong
+      community.general.puppet:
+        timeout: 1m
